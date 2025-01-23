@@ -14,7 +14,10 @@ const { protect } = require("../middlewares/auth");
 const upload = require("../middlewares/fileHandler");
 
 router.route("/tags").get(getTags);
-router.route("/").get(getPosts).post(protect, upload.array("files"), addPost);
+router
+  .route("/")
+  .get(protect, getPosts)
+  .post(protect, upload.array("files"), addPost);
 router.route("/search").get(searchPost);
 router.route("/:id").get(protect, getPost);
 router.route("/:id/togglelike").get(protect, toggleLike);
